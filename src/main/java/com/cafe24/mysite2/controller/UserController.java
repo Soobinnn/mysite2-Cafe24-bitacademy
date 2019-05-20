@@ -69,5 +69,37 @@ public class UserController {
 		
 		return "redirect:/";
 	}
+	@RequestMapping( value="/update", method=RequestMethod.GET )
+	public String update(HttpSession session, Model model ){
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		UserVo userVo = userService.getUser( authUser.getNo() );
+		model.addAttribute( "userVo", userVo );
+		return "user/update";
+	}
 	
+	@RequestMapping( value="/update", method=RequestMethod.POST )
+	public String update( HttpSession session, @ModelAttribute UserVo userVo ){
+		UserVo authUser = (UserVo)session.getAttribute("authUser");
+		if(authUser == null) {
+			return "redirect:/";
+		}
+		
+		userVo.setNo( authUser.getNo() );
+		userService.updateUser( userVo );
+		
+		// session의 authUser 변경
+		authUser.setName(userVo.getName());
+		
+		return "redirect:/user/update?result=success";
+	}
+	
+//	@ExceptionHandler( Exception.class )
+//	public String handleUserDaoException() {
+//		System.out.println("!!!!!!!!!!!");
+//		return "error/exception";
+//	}
 }

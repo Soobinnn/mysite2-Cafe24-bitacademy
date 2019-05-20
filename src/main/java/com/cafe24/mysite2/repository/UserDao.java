@@ -17,13 +17,15 @@ public class UserDao
 	@Autowired
 	private SqlSession sqlSession;
 	
-	public UserVo get(Long no)
-	{
+	public UserVo get(String email) {
+		return sqlSession.selectOne("user.getByEmail", email);
+	}
+	
+	public UserVo get(Long no){
 		return sqlSession.selectOne("user.getByNo", no);
 	}
 	
-	public UserVo get(String email, String password) throws UserDaoException 
-	{
+	public UserVo get(String email, String password) throws UserDaoException {
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("email", email);
 		map.put("password", password);
@@ -32,11 +34,14 @@ public class UserDao
 		return userVo;
 	}	
 	
-	public Boolean insert(UserVo vo) 
-	{
+	public Boolean insert(UserVo vo) {
 		System.out.println(vo);
 		int count = sqlSession.insert("user.insert", vo);
 		System.out.println(vo);
 		return 1 == count;
-	}	
+	}
+	
+	public int update( UserVo userVo ) {
+		return sqlSession.update( "user.update", userVo );
+	}
 }
