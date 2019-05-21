@@ -55,7 +55,7 @@
 		<![CDATA[	 
 		select no, name, email, gender
 		  from user 
-		 where email = #{value }
+		 where email = #{email}
 		]]>
 	</select>
 	

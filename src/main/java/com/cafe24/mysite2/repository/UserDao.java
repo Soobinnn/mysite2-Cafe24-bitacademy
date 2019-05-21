@@ -4,20 +4,25 @@ package com.cafe24.mysite2.repository;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.mysite2.controller.MainController;
 import com.cafe24.mysite2.exception.UserDaoException;
 import com.cafe24.mysite2.vo.UserVo;
 
 @Repository
 public class UserDao 
 {
+	private static final Log LOG = LogFactory.getLog(UserDao.class);
 	@Autowired
 	private SqlSession sqlSession;
 	
 	public UserVo get(String email) {
+		LOG.info("UserDao[email]:["+email+"]");
 		return sqlSession.selectOne("user.getByEmail", email);
 	}
 	

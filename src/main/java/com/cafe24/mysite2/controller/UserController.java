@@ -48,10 +48,12 @@ public class UserController {
 		@RequestParam(value="email", required=true, defaultValue="") String email,
 		@RequestParam(value="password", required=true, defaultValue="") String password,
 		HttpSession session,
-		Model model) {
+		Model model) 
+	{
+		UserVo authUser = userService.getUser( new UserVo(email, password));
 		
-		UserVo authUser = userService.getUser( new UserVo(email, password) );
-		if(authUser == null) {
+		if(authUser == null) 
+		{
 			model.addAttribute("result", "fail");
 			return "user/login";
 		}

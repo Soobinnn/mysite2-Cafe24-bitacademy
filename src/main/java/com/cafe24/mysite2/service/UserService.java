@@ -1,5 +1,7 @@
 package com.cafe24.mysite2.service;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,11 +13,14 @@ import com.cafe24.mysite2.vo.UserVo;
 @Service
 public class UserService {
 	
+	private static final Log LOG = LogFactory.getLog(UserService.class);
+	
 	@Autowired
 	private UserDao userDao;
 	
 	public Boolean existEmail(String email) {
 		UserVo userVo = userDao.get(email);
+		LOG.info("UserService[userVo]:["+userVo+"]");
 		return userVo != null;
 	}
 	

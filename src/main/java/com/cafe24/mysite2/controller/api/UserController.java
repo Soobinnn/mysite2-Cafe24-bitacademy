@@ -3,6 +3,8 @@ package com.cafe24.mysite2.controller.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ import com.cafe24.mysite2.service.UserService;
 @RequestMapping("/user/api")
 public class UserController 
 {
+	private static final Log LOG = LogFactory.getLog(UserController.class);
+	
 	@Autowired
 	private UserService userService;
 	
@@ -23,6 +27,7 @@ public class UserController
 	@RequestMapping("/checkemail")
 	public JSONResult checkEmail(@RequestParam(value="email", required=true, defaultValue="") String email) {
 		Boolean exist = userService.existEmail(email);
+		LOG.info("exist:["+exist+"]");
 		return JSONResult.success(exist);
 	}
 }
