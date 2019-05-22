@@ -11,8 +11,9 @@ public class BoardVo
 	private Date reg_date;
 	private Long group_no;
 	private Long order_no;
-	private Long depth_no;
+	private Long depth;
 	private Long no;
+	private String name;
 	
 	public Long getBoard_no() {
 		return board_no;
@@ -56,17 +57,24 @@ public class BoardVo
 	public void setOrder_no(Long order_no) {
 		this.order_no = order_no;
 	}
-	public Long getDepth_no() {
-		return depth_no;
+	
+	public Long getDepth() {
+		return depth;
 	}
-	public void setDepth_no(Long depth_no) {
-		this.depth_no = depth_no;
+	public void setDepth(Long depth) {
+		this.depth = depth;
 	}
 	public Long getNo() {
 		return no;
 	}
 	public void setNo(Long no) {
 		this.no = no;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

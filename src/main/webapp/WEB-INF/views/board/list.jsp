@@ -34,12 +34,12 @@ console.log('${sessionScope.authUser.no}');
 					</tr>	
 					<c:forEach items="${list}" var="vo" varStatus="status">		
 					<tr>
-						<td>3</td>
+						<td>${vo.board_no}</td>
 						<td style="text-align:left; padding-left:${20*0 }px">
-							<a href="">세 번째 글입니다.</a></td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-11 12:04:20</td>
+							<a href="${pageContext.servletContext.contextPath}/board/view?no=${vo.board_no}">${vo.title }</a></td>
+						<td>${vo.name }</td>
+						<td>${vo.hit }</td>
+						<td>${vo.reg_date }</td>
 						<td><a href="" class="del">삭제</a></td>
 					</tr>
 					</c:forEach>	
@@ -83,7 +83,7 @@ console.log('${sessionScope.authUser.no}');
 				<!-- pager 추가 -->				
 				<c:if test="${!empty sessionScope.authUser.no}">
 				<div class="bottom">
-					<a href="" id="new-book">글쓰기</a>
+					<a href="${pageContext.servletContext.contextPath}/board/write" id="new-book">글쓰기</a>
 				</div>
 				</c:if>				
 			</div>
