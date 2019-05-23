@@ -18,13 +18,15 @@
 				<form class="board-form" method="post" action="${pageContext.servletContext.contextPath}/board/write">
 					<c:choose>
 						<c:when test='${!empty replyBoard}'>
+							<input type = "hidden" name = "group_no" value="${replyBoard.group_no}">
 							<input type = "hidden" name = "order_no" value="${replyBoard.order_no}">
 							<input type = "hidden" name = "depth" value="${replyBoard.depth}">
+						</c:when>
 						<c:otherwise>
 							<input type = "hidden" name = "order_no" value="1">
 							<input type = "hidden" name = "depth" value="0">
 						</c:otherwise>
-						</c:when>
+						
 					</c:choose>
 					<input type = "hidden" name = "hit" value="0">
 					<input type = "hidden" name = "no" value="${sessionScope.authUser.no}">		

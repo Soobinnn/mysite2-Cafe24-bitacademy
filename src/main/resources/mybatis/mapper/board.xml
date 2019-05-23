@@ -8,7 +8,12 @@
 			#{order_no}, #{depth}, #{no})
 		]]>
 	</insert>
-	
+	<insert id="replyBoardInsert" parameterType="boardvo">
+		<![CDATA[
+			INSERT INTO board VALUES (null, #{title}, #{contents}, #{hit}, now(), 
+			#{group_no},#{order_no}, #{depth}, #{no})
+		]]>	
+	</insert>	
 	<select id="getList" resultType="boardvo">
 		<![CDATA[
 			SELECT a.*,b.name FROM board a, user b WHERE a.no = b.no ORDER BY group_no DESC, order_no ASC
@@ -20,5 +25,29 @@
 			SELECT a.*,b.name FROM board a, user b WHERE a.no = b.no AND board_no = #{board_no}
 		]]>
 	</select>
+	
+	<update id="updateOrderNo" parameterType="Long">
+		<![CDATA[
+			UPDATE board SET order_no = order_no+1 WHERE order_no > #{group_no}
+		]]>
+	</update>	
+	
+	<update id="modify" parameterType="boardvo">
+		<![CDATA[
+			UPDATE board SET title=#{title},contents=#{contents},reg_date=now() WHERE board_no=#{board_no}
+		]]>
+	</update>
+	
+	<delete id="delete" parameterType="boardvo">
+	<![CDATA[
+		DELETE FROM BOARD WHERE board_no = #{board_no}
+	]]>
+	</delete>
+	
+	<update id="hitUp" parameterType="boardvo">
+		<![CDATA[
+			UPDATE board SET hit = hit + 1 WHERE board_no=#{board_no}
+		]]>
+	</update>
 	
 </mapper>

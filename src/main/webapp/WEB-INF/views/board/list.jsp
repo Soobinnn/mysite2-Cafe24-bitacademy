@@ -35,36 +35,17 @@ console.log('${sessionScope.authUser.no}');
 					<c:forEach items="${list}" var="vo" varStatus="status">		
 					<tr>
 						<td>${vo.board_no}</td>
-						<td style="text-align:left; padding-left:${20*0 }px">
+							<td style="text-align:left; padding-left:${20*vo.depth}px">
+							<c:if test='${vo.depth>0}'>
+							<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png'>
+							</c:if>
 							<a href="${pageContext.servletContext.contextPath}/board/view?no=${vo.board_no}">${vo.title }</a></td>
 						<td>${vo.name }</td>
 						<td>${vo.hit }</td>
 						<td>${vo.reg_date }</td>
-						<td><a href="" class="del">삭제</a></td>
+						<td><a href="${pageContext.servletContext.contextPath}/board/delete?" class="del">삭제</a></td>
 					</tr>
 					</c:forEach>	
-					<tr>
-						<td>2</td>
-						<td style="text-align:left; padding-left:${20*1 }px">
-							<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png'>
-							<a href="">두 번째 글입니다.</a>
-						</td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-10-02 12:04:12</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td style="text-align:left; padding-left:${20*2 }px">
-							<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png'>
-							<a href="">첫 번째 글입니다.</a>
-						</td>
-						<td>안대혁</td>
-						<td>3</td>
-						<td>2015-09-25 07:24:32</td>
-						<td><a href="" class="del">삭제</a></td>
-					</tr>
 				</table>
 				
 				<!-- pager 추가 -->

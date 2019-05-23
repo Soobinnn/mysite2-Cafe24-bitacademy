@@ -76,6 +76,12 @@ public class BoardVo
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
+	public String toString() {
+		return "BoardVo [board_no=" + board_no + ", title=" + title + ", contents=" + contents + ", hit=" + hit
+				+ ", reg_date=" + reg_date + ", group_no=" + group_no + ", order_no=" + order_no + ", depth=" + depth
+				+ ", no=" + no + ", name=" + name + "]";
+	}
 	
 	
 }

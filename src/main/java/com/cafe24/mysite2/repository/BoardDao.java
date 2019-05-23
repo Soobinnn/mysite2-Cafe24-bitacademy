@@ -29,4 +29,24 @@ public class BoardDao
 	{
 		return sqlSession.selectOne("board.getView", board_no);
 	}
+	
+	public void updateOrderNo(Long order_no)
+	{
+		sqlSession.update("board.updateOrderNo", order_no);
+	}
+	
+	public void modify(BoardVo boardVo)
+	{
+		sqlSession.update("board.modify", boardVo);
+	}
+	
+	public void replyBoardInsert(BoardVo boardVo)
+	{
+		sqlSession.insert("board.replyBoardInsert", boardVo);
+	}
+	
+	public void hitUp(Long board_no)
+	{
+		sqlSession.update("board.hitUp", board_no);
+	}
 }

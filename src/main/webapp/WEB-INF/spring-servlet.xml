@@ -58,7 +58,6 @@
 	</bean>	
 
 	<!-- 6. MessageSource -->
-
 	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basenames">
 			<list>
@@ -66,4 +65,12 @@
 			</list>
 		</property>
 	</bean>
+
+	<!-- interceptors -->
+	<!-- <mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/guestbook/**"/>
+			<bean class="com.cafe24.mysite2.interceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
 </beans>

@@ -38,7 +38,7 @@
 		update user
 		   set name = #{name },
 		]]>
-		<!-- IF문은 파라미터가 객테가아니라 기본 값일 경우엔 _parameter를 사용해야함  -->
+		<!-- IF문은 파라미터가 객체가아니라 기본 값일 경우엔 _parameter를 사용해야함  -->
 		<if test="password != ''">
 			<![CDATA[
 			password=#{password }

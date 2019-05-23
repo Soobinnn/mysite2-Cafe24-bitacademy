@@ -29,4 +29,38 @@ public class BoardService
 	{
 		return boardDao.getView(board_no);
 	}	
+	
+	public BoardVo replyWrite(Long group_no, Long depth, Long order_no)
+	{
+		boardDao.updateOrderNo(order_no);
+		
+		BoardVo vo = new BoardVo();
+		
+		vo.setGroup_no(group_no);
+		vo.setOrder_no(order_no+1);
+		vo.setDepth(depth+1);
+		return vo;
+	}
+	
+	public void modify(BoardVo boardVo)
+	{
+		boardDao.modify(boardVo);
+	}
+	
+	public void replyBoardInsert(BoardVo boardVo)
+	{
+		boardDao.replyBoardInsert(boardVo);
+	}
+	
+/*	public Boolean cookieCheck(Long board_no)
+	{
+
+	}*/
+	
+	public void hitUp(Long board_no)
+	{
+		boardDao.hitUp(board_no);
+	}
+	
+	
 }

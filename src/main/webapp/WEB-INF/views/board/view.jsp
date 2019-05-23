@@ -14,30 +14,36 @@
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 		<div id="content">
 			<div id="board" class="board-form">
+			<form class="board-form" method="post" action="${pageContext.servletContext.contextPath}/board/modify">
+				<input type="hidden" name="title" value="${view.title}">
+				<input type="hidden" name="contents" value="${view.contents}">
+				<input type="hidden" name="board_no" value="${view.board_no}">
+				
 				<table class="tbl-ex">
 					<tr>
 						<th colspan="2">글보기</th>
 					</tr>
 					<tr>
 						<td class="label">제목</td>
-						<td>${view.title }</td>
+						<td>${view.title}</td>
 					</tr>
 					<tr>
 						<td class="label">내용</td>
 						<td>
 							<div class="view-content">
-								${view.title}
+								${view.contents}
 							</div>
 						</td>
 					</tr>
 				</table>
-				<div class="bottom">
 					<a href="${pageContext.servletContext.contextPath}/board">글목록</a>
-					<a href="${pageContext.servletContext.contextPath}/board/modify?no=${view.no}">글수정</a>
-					<a href="${pageContext.servletContext.contextPath}/board/write?">답글</a>
+					<input type="submit" value="글수정"/>
+					<a href="${pageContext.servletContext.contextPath}/board/replyBoard?g=${view.group_no}&d=${view.depth}&o=${view.order_no}">답글</a>
+			</form>
 				</div>
 			</div>
 		</div>
+		<div class="bottom">
 		<c:import url='/WEB-INF/views/includes/navigation.jsp'>
 			<c:param name="menu" value="board" />
 		</c:import>
