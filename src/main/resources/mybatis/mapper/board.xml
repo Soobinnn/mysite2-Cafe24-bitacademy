@@ -3,7 +3,7 @@
 <mapper namespace="board">
 	<insert id="insert" parameterType="boardvo">
 		<![CDATA[
-			INSERT INTO board VALUES (null, #{title}, #{contents}, #{hit}, now(), 
+			INSERT INTO board VALUES (null, #{title}, #{contents}, #{hit}, date_format(now(), '%Y-%m-%d %h:%i:%s') as reg_date, 
 			(SELECT max(group_no)+1 FROM board ALIAS_FOR_SUBQUERY),
 			#{order_no}, #{depth}, #{no})
 		]]>
@@ -38,16 +38,18 @@
 		]]>
 	</update>
 	
-	<delete id="delete" parameterType="boardvo">
+	<update id="delete" parameterType="boardvo">
 	<![CDATA[
-		DELETE FROM BOARD WHERE board_no = #{board_no}
+		update board SET reg_date = '9999-01-01 11:11:11' where board_no = #{board_no};
 	]]>
-	</delete>
+	</update>
 	
 	<update id="hitUp" parameterType="boardvo">
 		<![CDATA[
 			UPDATE board SET hit = hit + 1 WHERE board_no=#{board_no}
 		]]>
 	</update>
+	
+	
 	
 </mapper>

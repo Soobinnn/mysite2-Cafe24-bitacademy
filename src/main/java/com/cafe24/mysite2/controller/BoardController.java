@@ -121,4 +121,5 @@ public class BoardController
 		
 		return "board/write";
 	}
+	
 }
