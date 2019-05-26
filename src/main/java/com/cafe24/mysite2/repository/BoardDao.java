@@ -49,4 +49,9 @@ public class BoardDao
 	{
 		sqlSession.update("board.hitUp", board_no);
 	}
+	
+	public void delete(Long board_no)
+	{
+		sqlSession.update("board.delete",board_no);
+	}
 }

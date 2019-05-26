@@ -52,15 +52,15 @@ public class BoardService
 		boardDao.replyBoardInsert(boardVo);
 	}
 	
-/*	public Boolean cookieCheck(Long board_no)
-	{
-
-	}*/
 	
 	public void hitUp(Long board_no)
 	{
 		boardDao.hitUp(board_no);
 	}
 	
+	public void deleteBoard(Long board_no)
+	{
+		boardDao.delete(board_no);
+	}
 	
 }

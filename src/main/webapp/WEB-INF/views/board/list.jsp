@@ -13,6 +13,7 @@
 console.log('${authUser}');
 console.log('${sessionScope.authUser}');
 console.log('${sessionScope.authUser.no}');
+console.log('${vo.reg_date}');
 </script>
 <body>
 	<div id="container">
@@ -33,6 +34,23 @@ console.log('${sessionScope.authUser.no}');
 						<th>&nbsp;</th>
 					</tr>	
 					<c:forEach items="${list}" var="vo" varStatus="status">		
+					<c:choose>
+					<c:when test='${vo.reg_date=="Fri Jan 01 11:11:11 KST 9999"}'>
+					<tr>
+						<td>${vo.board_no}</td>
+							<td style="text-align:left; padding-left:${20*vo.depth}px">
+							<c:if test='${vo.depth>0}'>
+							<img src='${pageContext.servletContext.contextPath }/assets/images/reply.png'>
+							</c:if>
+							<span>삭제된 게시글 입니다.</span>
+							</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					</c:when>
+					<c:otherwise>
 					<tr>
 						<td>${vo.board_no}</td>
 							<td style="text-align:left; padding-left:${20*vo.depth}px">
@@ -42,9 +60,18 @@ console.log('${sessionScope.authUser.no}');
 							<a href="${pageContext.servletContext.contextPath}/board/view?no=${vo.board_no}">${vo.title }</a></td>
 						<td>${vo.name }</td>
 						<td>${vo.hit }</td>
-						<td>${vo.reg_date }</td>
-						<td><a href="${pageContext.servletContext.contextPath}/board/delete?" class="del">삭제</a></td>
+						<td><fmt:formatDate value="${vo.reg_date}" pattern="yyyy-MM-dd"/></td>
+						<c:choose>
+						<c:when test='${sessionScope.authUser.no==vo.no}'>
+							<td><a href="${pageContext.servletContext.contextPath}/board/delete?n=${vo.board_no}" class="del">삭제</a></td>
+						</c:when>
+						<c:when test='${sessionScope.authUser.no!=vo.no}'>
+							<td></td>
+						</c:when>
+						</c:choose>
 					</tr>
+					</c:otherwise>
+					</c:choose>
 					</c:forEach>	
 				</table>
 				

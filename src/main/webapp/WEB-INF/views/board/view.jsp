@@ -38,7 +38,14 @@
 				</table>
 					<a href="${pageContext.servletContext.contextPath}/board">글목록</a>
 					<input type="submit" value="글수정"/>
-					<a href="${pageContext.servletContext.contextPath}/board/replyBoard?g=${view.group_no}&d=${view.depth}&o=${view.order_no}">답글</a>
+					<c:choose>
+						<c:when test='${empty sessionScope.authUser}'>
+						<a href="${pageContext.servletContext.contextPath}/user/login">답글</a>
+						</c:when>
+						<c:otherwise>
+						<a href="${pageContext.servletContext.contextPath}/board/replyBoard?g=${view.group_no}&d=${view.depth}&o=${view.order_no}">답글</a>
+						</c:otherwise>
+					</c:choose>
 			</form>
 				</div>
 			</div>
