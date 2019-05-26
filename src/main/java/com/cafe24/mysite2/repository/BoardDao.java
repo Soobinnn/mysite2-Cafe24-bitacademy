@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.cafe24.mysite2.util.Paging;
 import com.cafe24.mysite2.vo.BoardVo;
 
 
@@ -20,9 +21,9 @@ public class BoardDao
 		sqlSession.insert("board.insert", boardVo);
 	}
 
-	public List<BoardVo> getList()
+	public List<BoardVo> getList(Paging pagination)
 	{
-		return sqlSession.selectList("board.getList");
+		return sqlSession.selectList("board.getList", pagination);
 	}
 	
 	public BoardVo getView(Long board_no)
@@ -53,5 +54,10 @@ public class BoardDao
 	public void delete(Long board_no)
 	{
 		sqlSession.update("board.delete",board_no);
+	}
+	
+	public long getListCount()
+	{
+		return sqlSession.selectOne("board.getListCount");
 	}
 }

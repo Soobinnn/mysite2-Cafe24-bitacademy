@@ -2,7 +2,8 @@ package com.cafe24.mysite2.vo;
 
 import java.util.Date;
 
-public class BoardVo 
+
+public class BoardVo
 {
 	private Long board_no;
 	private String title;

@@ -131,3 +131,39 @@ a.del	{
 	background:url("/mysite2/assets/images/recycle.png") no-repeat 0 0;
 	font-size:0;
 }
+
+.pagination {
+	list-style:none;
+	float:left;
+	display:inline;
+}
+.pagination  li {
+	float:left;
+}
+.pagination  li a {
+	float:left;
+	padding:4px;
+	margin-right:3px;
+	width:15px;
+	color:#000;
+	font:bold 12px tahoma;
+	border:1px solid #eee;
+	text-align:center;
+	text-decoration:none;
+}
+.pagination  li a:hover, .pagination  li a:focus {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
+}
+.page-item.active
+{
+	position:relative;
+	width : 25px;
+	
+	background-color:#f40;
+}
+.page-item.active > a
+{
+color:#fff !important;
+}

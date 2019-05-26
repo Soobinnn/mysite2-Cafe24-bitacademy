@@ -3,9 +3,8 @@
 <mapper namespace="board">
 	<insert id="insert" parameterType="boardvo">
 		<![CDATA[
-			INSERT INTO board VALUES (null, #{title}, #{contents}, #{hit}, date_format(now(), '%Y-%m-%d %h:%i:%s') as reg_date, 
-			(SELECT max(group_no)+1 FROM board ALIAS_FOR_SUBQUERY),
-			#{order_no}, #{depth}, #{no})
+			INSERT INTO board VALUES (null, #{title}, #{contents}, #{hit}, date_format(now(), '%Y-%m-%d %h:%i:%s'), 
+			(SELECT max(group_no)+1 FROM board ALIAS_FOR_SUBQUERY), #{order_no}, #{depth}, #{no})
 		]]>
 	</insert>
 	<insert id="replyBoardInsert" parameterType="boardvo">
@@ -14,9 +13,17 @@
 			#{group_no},#{order_no}, #{depth}, #{no})
 		]]>	
 	</insert>	
-	<select id="getList" resultType="boardvo">
+	<select id="getList" parameterType="pagination" resultType="boardvo">
 		<![CDATA[
-			SELECT a.*,b.name FROM board a, user b WHERE a.no = b.no ORDER BY group_no DESC, order_no ASC
+			SELECT a.*,b.name FROM board a, user b WHERE a.no = b.no 
+			ORDER BY group_no DESC, order_no ASC
+			LIMIT #{startList}, #{listSize}
+		]]>
+	</select>
+	
+	<select id="getListCount" resultType="long">
+	<![CDATA[
+		SELECT count(*) FROM board
 		]]>
 	</select>
 	

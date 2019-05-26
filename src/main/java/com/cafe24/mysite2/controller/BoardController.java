@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.mysite2.service.BoardService;
+import com.cafe24.mysite2.util.Paging;
 import com.cafe24.mysite2.vo.BoardVo;
 
 @Controller
@@ -27,11 +28,22 @@ public class BoardController
 	private BoardService boardService;
 	
 	@RequestMapping("")
-	public String list(Model model)
+	public String list(Model model, @RequestParam(required = false, defaultValue="1") long page, @RequestParam(required=false, defaultValue="1") long range)
 	{
-		List<BoardVo> boardList = boardService.boardList();
+		//전체 게시글 개수
+		long listCnt = boardService.getListCount();
+
+		 //Pagination 객체생성
+		Paging pagination = new Paging();
+		pagination.pageInfo(page, range, listCnt);
+
+		List<BoardVo> boardList = boardService.boardList(pagination);
+		
+		model.addAttribute("pagination", pagination);
 		model.addAttribute("list",boardList);
 		
+		
+		System.out.println(pagination.toString());
 		return "board/list";
 	}
 	
@@ -44,7 +56,8 @@ public class BoardController
 	@RequestMapping(value="/write", method=RequestMethod.POST)
 	public String write(@ModelAttribute BoardVo boardVo)
 	{
-		if("".equals(boardVo.getGroup_no())||boardVo.getGroup_no()==null)
+		System.out.println(boardVo.toString());
+		if(boardVo.getGroup_no()==null)
 		{
 			boardService.boardWrite(boardVo);
 		}
@@ -82,7 +95,6 @@ public class BoardController
 			   }
 		   }
 		 }
-
 		//상세정보 조회시 카운트 증가
 		if(countCheck > 0)
 		{
