@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.cafe24.mysite2.service.BoardService;
 import com.cafe24.mysite2.util.Paging;
+import com.cafe24.mysite2.util.Search;
 import com.cafe24.mysite2.vo.BoardVo;
 
 @Controller
@@ -28,22 +29,27 @@ public class BoardController
 	private BoardService boardService;
 	
 	@RequestMapping("")
-	public String list(Model model, @RequestParam(required = false, defaultValue="1") long page, @RequestParam(required=false, defaultValue="1") long range)
+	public String list(Model model, @RequestParam(required = false, defaultValue="1") long page, 
+			@RequestParam(required=false, defaultValue="1") long range,
+			@RequestParam(required = false, defaultValue = "title") String searchType,
+			@RequestParam(required = false) String kwd)
 	{
-		//전체 게시글 개수
-		long listCnt = boardService.getListCount();
-
-		 //Pagination 객체생성
-		Paging pagination = new Paging();
-		pagination.pageInfo(page, range, listCnt);
-
-		List<BoardVo> boardList = boardService.boardList(pagination);
 		
-		model.addAttribute("pagination", pagination);
+		Search search = new Search();
+		search.setSearchType(searchType);
+		search.setKwd(kwd);
+		
+		//전체 게시글 개수
+		long listCnt = boardService.getListCount(search);
+
+		search.pageInfo(page, range, listCnt);
+
+		List<BoardVo> boardList = boardService.boardList(search);
+		
+		model.addAttribute("pagination", search);
 		model.addAttribute("list",boardList);
 		
-		
-		System.out.println(pagination.toString());
+		System.out.println(search.toString());
 		return "board/list";
 	}
 	

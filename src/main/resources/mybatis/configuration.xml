@@ -7,6 +7,7 @@
 		<typeAlias alias="guestbookvo" type="com.cafe24.mysite2.vo.GuestbookVo"></typeAlias>
 		<typeAlias alias="boardvo" type="com.cafe24.mysite2.vo.BoardVo"></typeAlias>
 		<typeAlias alias="pagination" type="com.cafe24.mysite2.util.Paging"></typeAlias>
+		<typeAlias alias="search" type="com.cafe24.mysite2.util.Search"></typeAlias>
 	</typeAliases>
 
 	<mappers>

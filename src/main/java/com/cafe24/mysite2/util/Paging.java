@@ -127,7 +127,6 @@ public class Paging
 		this.range = range;
 		this.listCnt = listCnt;
 		//전체 페이지수 
-		System.out.println("------------뭐야아아"+listCnt);
 		this.pageCnt = (long) Math.ceil((double)listCnt/(double)listSize);
 		//시작 페이지
 		this.startPage = (range - 1) * rangeSize + 1 ;

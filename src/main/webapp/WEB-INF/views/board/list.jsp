@@ -60,7 +60,12 @@ function fn_prev(page, range, rangeSize)
 		<c:import url='/WEB-INF/views/includes/header.jsp' />
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="" method="post">
+				<form id="search_form" action="${pageContext.request.contextPath}/board" method="get">
+					<select class="searchType" name="searchType" id="searchType">
+						<option value="title">제목</option>
+						<option value="contents">본문</option>
+						<option value="name">작성자</option>
+					</select>
 					<input type="text" id="kwd" name="kwd" value="">
 					<input type="submit" value="찾기">
 				</form>

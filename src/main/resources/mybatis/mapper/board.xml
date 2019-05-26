@@ -13,18 +13,45 @@
 			#{group_no},#{order_no}, #{depth}, #{no})
 		]]>	
 	</insert>	
-	<select id="getList" parameterType="pagination" resultType="boardvo">
+	<select id="getList" parameterType="search" resultType="boardvo">
 		<![CDATA[
-			SELECT a.*,b.name FROM board a, user b WHERE a.no = b.no 
-			ORDER BY group_no DESC, order_no ASC
+			SELECT a.*,b.name FROM board a JOIN user b ON a.no = b.no 
+		]]>
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+				<if test="searchType=='title' and kwd != null and kwd != '' ">
+				AND title like CONCAT('%', #{kwd}, '%')
+			</if>
+			<if test="searchType=='contents' and kwd != null and kwd != '' ">
+				AND contents like CONCAT('%', #{kwd}, '%')
+			</if>
+			<if test="searchType=='name' and kwd != null and kwd != '' ">
+				AND b.name like CONCAT('%', #{kwd}, '%')
+			</if>	
+		</trim>
+		<![CDATA[
+			ORDER BY group_no DESC, order_no ASC	
 			LIMIT #{startList}, #{listSize}
 		]]>
+			
 	</select>
 	
-	<select id="getListCount" resultType="long">
+	<select id="getListCount"  parameterType="search" resultType="long">
 	<![CDATA[
-		SELECT count(*) FROM board
-		]]>
+		SELECT count(*) FROM board a JOIN user b ON a.no = b.no 
+	]]>
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
+			<if test="kwd != null and kwd != '' ">
+				<if test="searchType=='title'">
+					AND title like CONCAT('%', #{kwd}, '%')
+				</if>
+				<if test="searchType=='content'">
+					AND contents like  CONCAT('%', #{kwd}, '%')
+				</if>
+				<if test="searchType=='name'">
+					AND b.name like  CONCAT('%', #{kwd}, '%')
+				</if>
+   	   		</if>
+		</trim>
 	</select>
 	
 	<select id="getView" parameterType="Long" resultType="boardvo">

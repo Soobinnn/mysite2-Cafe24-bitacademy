@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cafe24.mysite2.repository.BoardDao;
-import com.cafe24.mysite2.util.Paging;
+import com.cafe24.mysite2.util.Search;
 import com.cafe24.mysite2.vo.BoardVo;
 
 @Service
@@ -21,9 +21,9 @@ public class BoardService
 		boardDao.write(boardVo);
 	}
 	
-	public List<BoardVo> boardList(Paging pagination)
+	public List<BoardVo> boardList(Search search)
 	{
-		return boardDao.getList(pagination);
+		return boardDao.getList(search);
 	}
 	
 	public BoardVo boardView(Long board_no)
@@ -64,9 +64,10 @@ public class BoardService
 		boardDao.delete(board_no);
 	}
 	
-	public long getListCount()
+	public long getListCount(Search search)
 	{
-		return boardDao.getListCount();
+		
+		return boardDao.getListCount(search);
 	}
 	
 }
